@@ -8,6 +8,9 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/storyofhis/foresta/src/server/config"
 	"github.com/storyofhis/foresta/src/server/httpserver"
+	"github.com/storyofhis/foresta/src/server/httpserver/controllers"
+	"github.com/storyofhis/foresta/src/server/httpserver/repositories/gorm"
+	"github.com/storyofhis/foresta/src/server/httpserver/services"
 )
 
 func init() {
@@ -24,7 +27,12 @@ func main() {
 	}
 
 	router := gin.Default()
+	config.GenerateJwtSignature()
 
-	app := httpserver.NewRouter(router)
+	userRepo := gorm.NewUserRepo(db)
+	userSvc := services.NewUserSvc(userRepo)
+	userHandler := controllers.NewUserController(userSvc)
+
+	app := httpserver.NewRouter(router, userHandler)
 	app.Start(":" + os.Getenv("PORT"))
 }
