@@ -22,15 +22,16 @@ func NewRouter(r *gin.Engine, user *controllers.UserController) *router {
 }
 
 func (r *router) Start(port string) {
-	r.router.GET("/", func(ctx *gin.Context) {
+	v1 := r.router.Group("/v1")
+	v1.GET("/", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{
 			"status": "server-run",
 		})
 	})
-	r.router.POST("/v1/users/register", r.user.Register)
-	r.router.POST("/v1/users/login", r.user.Login)
-	r.router.PUT("/v1/users/:userId", r.verifyToken, r.user.Update)
-	r.router.DELETE("/v1/users", r.verifyToken, r.user.Delete)
+	v1.POST("/users/register", r.user.Register)
+	v1.POST("/users/login", r.user.Login)
+	v1.PUT("/users/:userId", r.verifyToken, r.user.Update)
+	v1.DELETE("/users", r.verifyToken, r.user.Delete)
 
 	r.router.Run(port)
 }
