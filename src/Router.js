@@ -4,6 +4,7 @@ import Home from "./Pages/Home";
 import "./App.css";
 import Login from "./Pages/login/index";
 import Register from "./Pages/register/index";
+import Dashboard from "./Pages/Dashboard/index";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-        {/* <Route exact path="/dashboard" /> */}
+        <Route exact path="/dashboard" component={Dashboard} />
       </Switch>
     </BrowserRouter>
   );

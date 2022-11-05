@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/storyofhis/foresta/src/server/httpserver/repositories/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -28,6 +29,6 @@ func ConnectDB() (*gorm.DB, error) {
 	}
 
 	// automigrate
-
+	db.Debug().AutoMigrate(models.User{})
 	return db, nil
 }
