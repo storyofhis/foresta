@@ -22,6 +22,8 @@ func NewUserController(svc services.UserSvc) *UserController {
 }
 
 func (c *UserController) Register(ctx *gin.Context) {
+	ctx.Writer.Header().Set("Content-Type", "application/json")
+    ctx.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 	var req params.Register
 	err := ctx.ShouldBindJSON(&req)
 	if err != nil {
@@ -44,6 +46,8 @@ func (c *UserController) Register(ctx *gin.Context) {
 }
 
 func (c *UserController) Login(ctx *gin.Context) {
+	ctx.Writer.Header().Set("Content-Type", "application/json")
+    ctx.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 	var req params.Login
 	err := ctx.ShouldBindJSON(&req)
 	if err != nil {
@@ -66,6 +70,8 @@ func (c *UserController) Login(ctx *gin.Context) {
 }
 
 func (c *UserController) Update(ctx *gin.Context) {
+	ctx.Writer.Header().Set("Content-Type", "application/json")
+    ctx.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 	id, err := strconv.Atoi(ctx.Param("userId"))
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
@@ -109,6 +115,8 @@ func (c *UserController) Update(ctx *gin.Context) {
 }
 
 func (c *UserController) Delete(ctx *gin.Context) {
+	ctx.Writer.Header().Set("Content-Type", "application/json")
+    ctx.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 	claims, exist := ctx.Get("userData")
 	if !exist {
 		ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{

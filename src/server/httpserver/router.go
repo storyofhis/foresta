@@ -23,6 +23,7 @@ func NewRouter(r *gin.Engine, user *controllers.UserController) *router {
 
 func (r *router) Start(port string) {
 	v1 := r.router.Group("/v1")
+	v1.Use(r.cors)
 	v1.GET("/", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{
 			"status": "server-run",
@@ -53,4 +54,17 @@ func (r *router) verifyToken(ctx *gin.Context) {
 	}
 	ctx.Set("userData", claims)
 	// ctx.Set("socialMediaData", claims)
+}
+
+func (r *router) cors(c *gin.Context) {
+	c.Header("Access-Control-Allow-Credentials", "true")
+	c.Header("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+	c.Header("Access-Control-Allow-Methods", "POST,HEAD,PATCH, OPTIONS, GET, PUT")
+
+	if c.Request.Method == "OPTIONS" {
+		c.AbortWithStatus(204)
+		return
+	}
+
+	c.Next()
 }

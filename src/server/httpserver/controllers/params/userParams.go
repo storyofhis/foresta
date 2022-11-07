@@ -1,7 +1,7 @@
 package params
 
 type Register struct {
-	Age      int    `json:"age" validate:"required,gt=8"`
+	Age      int    `json:"age"`
 	Email    string `json:"email" validate:"required,email"`
 	Password string `json:"password"`
 	Username string `json:"username"`
