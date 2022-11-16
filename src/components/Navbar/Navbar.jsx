@@ -4,7 +4,7 @@ import { ShoppingCart } from "@material-ui/icons";
 import { Link, useLocation } from "react-router-dom";
 import LogoSvg from "../../assets/logo.svg";
 
-import logo from "../../assets/commerce.png";
+// import logo from "../../assets/commerce.png";
 import useStyles from "./styles";
 
 const PrimarySearchAppBar = ({ totalItems }) => {
@@ -28,7 +28,7 @@ const PrimarySearchAppBar = ({ totalItems }) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem backgroundColor="#7ACB90">
         <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
           <Badge badgeContent={totalItems} color="secondary">
             <ShoppingCart />
@@ -42,7 +42,7 @@ const PrimarySearchAppBar = ({ totalItems }) => {
   return (
     <>
       <AppBar position="fixed" className={classes.appBar} color="inherit">
-        <Toolbar>
+        <Toolbar backgroundColor="#7ACB90">
           <Typography component={Link} to="/" variant="h6" className={classes.title} color="inherit">
             <img src={LogoSvg} alt="commerce.js" height="25px" className={classes.image} />
           </Typography>
@@ -56,7 +56,7 @@ const PrimarySearchAppBar = ({ totalItems }) => {
             Pohonku
           </Typography>
           <div className={classes.grow} />
-          {location.pathname === "/" && (
+          {location.pathname === "/bibit-pohon" && (
             <div className={classes.button}>
               <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
                 <Badge badgeContent={totalItems} color="secondary">

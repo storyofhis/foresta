@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { commerce } from "./lib/commerce";
 import { Products, Navbar, Cart, Checkout } from "./components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -65,6 +66,9 @@ function App() {
           <Route exact path="/">
             <Products products={products} onAddToCart={handleAddToCart} />
           </Route>
+          <Route exact path="/bibit-pohon">
+            <Products products={products} onAddToCart={handleAddToCart} />
+          </Route>
           <Route exact path="/cart">
             <Cart cart={cart} handleAddCartQty={handleAddCartQty} handleRemoveFromCart={handleRemoveFromCart} handleEmptyCart={handleEmptyCart} />
           </Route>
@@ -72,6 +76,7 @@ function App() {
             <Checkout cart={cart} order={order} onCaptureCheckout={handleCaptureCheckout} error={errorMessage} />
           </Route>
         </Switch>
+        <Footer />
       </div>
     </Router>
   );

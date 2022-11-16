@@ -7,7 +7,7 @@ const EmptyCart = () => {
   return (
     <Typography variant="subtitle1">
       You have no items in your shooping cart,
-      <Link to="/" className={classes.link}>
+      <Link to="/bibit-pohon" className={classes.link}>
         start adding some
       </Link>
       !

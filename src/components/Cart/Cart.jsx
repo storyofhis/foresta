@@ -13,7 +13,7 @@ const Cart = ({ cart, handleAddCartQty, handleRemoveFromCart, handleEmptyCart })
     <Container>
       <div className={classes.toolbar} />
       <Typography className={classes.title} variant="h3" gutterBottom>
-        Your Shoping Cart
+        Pembelian
       </Typography>
       {!cart.line_items.length ? <EmptyCart /> : <FilledCart cart={cart} handleAddCartQty={handleAddCartQty} handleRemoveFromCart={handleRemoveFromCart} handleEmptyCart={handleEmptyCart} />}
     </Container>

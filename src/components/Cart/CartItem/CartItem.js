@@ -1,14 +1,15 @@
 import React from "react";
 import { Typography, Button, Card, CardActions, CardContent, CardMedia } from "@material-ui/core";
 import useStyles from "./styles";
-const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
+const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart, product }) => {
   const classes = useStyles();
   return (
     <Card>
       <CardMedia image={item.media.source} alt={item.name} className={classes.media} />
       <CardContent className={classes.cardContent}>
-        <Typography className={item.name}></Typography>
-        <Typography className={item.line_total.formatted_with_symbol}></Typography>
+        <Typography className={item.name}>{item.product_name}</Typography>
+        {/* <Typography className={item.line_total.formatted_with_symbol}>{}</Typography> */}
+        <Typography dangerouslySetInnerHTML={{ __html: item.description }} variant="body2" color="textSecondary" />
       </CardContent>
       <CardActions className={classes.cardActions}>
         <div className={classes.buttons}>
