@@ -27,6 +27,7 @@ const PrimarySearchAppBar = ({ totalItems }) => {
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
+      backgroundColor="#7ACB90"
     >
       <MenuItem backgroundColor="#7ACB90">
         <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
