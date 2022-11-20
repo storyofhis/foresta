@@ -6,10 +6,13 @@ import { Heading } from "@chakra-ui/layout";
 import { VStack, Spacer } from "@chakra-ui/layout";
 import { FaSun, FaMoon, FaGithub, FaLinkedin } from "react-icons/fa";
 import { SiMedium } from "react-icons/si";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../../assets/logo.svg";
 import { CiUser } from "react-icons/ci";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, useLocation } from "react-router-dom";
+import { FiShoppingCart } from "react-icons/fi";
+import { Badge } from "@chakra-ui/react";
+import { commerce } from "../../../lib/commerce";
 
 const Links = ["dashboard", "bibit", "PohonKu"];
 
@@ -32,7 +35,59 @@ const NavLink = ({ children }) => (
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isDark = colorMode === "dark";
+  const location = useLocation();
+
+  const [cart, setCart] = useState({});
+  const [items, setItems] = useState([]);
+  const [order, setOrder] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const fetchProducts = async () => {
+    const { data } = await commerce.products.list();
+    setItems(data);
+  };
+  const fetchCart = async () => {
+    setCart(await commerce.cart.retrieve());
+  };
+  const handleAddToCart = async (productId, quantity) => {
+    const { cart } = await commerce.cart.add(productId, quantity);
+    setCart(cart);
+  };
+
+  const handleAddCartQty = async (productId, quantity) => {
+    const { cart } = await commerce.cart.update(productId, { quantity });
+    setCart(cart);
+  };
+
+  const handleRemoveFromCart = async (productId) => {
+    const { cart } = await commerce.cart.remove(productId);
+    setCart(cart);
+  };
+
+  const handleEmptyCart = async () => {
+    const { cart } = await commerce.cart.empty();
+    setCart(cart);
+  };
+
+  const refreshCart = async () => {
+    const newCart = await commerce.cart.refresh();
+    setCart(newCart);
+  };
+  const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
+    try {
+      const incomingOrder = await commerce.checkout.capture(checkoutTokenId, newOrder);
+      setOrder(incomingOrder);
+      refreshCart();
+    } catch (error) {
+      setErrorMessage(error.data.error.message);
+    }
+  };
+  useEffect(() => {
+    fetchProducts();
+    fetchCart();
+  }, []);
 
   return (
     <Box bg={useColorModeValue("#7ACB90", "gray.900")} px={4}>
@@ -56,11 +111,19 @@ const Navbar = () => {
               <Flex w="100%">
                 <Spacer />
                 <Stack direction="row" spacing={4} align="center">
+                  {location.pathname === "/bibit" && (
+                    <>
+                      <Link href="/cart">
+                        <Badge> {cart.total_items} </Badge>
+                        <IconButton ml={2} icon={<FiShoppingCart />} isRound="true" />
+                      </Link>
+                    </>
+                  )}
                   <Link href="/user" target="_blank">
                     <IconButton ml={2} icon={<CiUser />} isRound="true" />
                   </Link>
                 </Stack>
-                <IconButton ml={8} /* </Flex>colorScheme="#006644" */ icon={isDark ? <FaSun /> : <FaMoon />} isRound="true" onClick={toggleColorMode}></IconButton>
+                <IconButton ml={8} icon={isDark ? <FaSun /> : <FaMoon />} isRound="true" onClick={toggleColorMode}></IconButton>
               </Flex>
             </VStack>
           </Menu>

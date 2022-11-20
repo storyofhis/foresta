@@ -1,18 +1,18 @@
 import React from "react";
 import { Card, CardHeader, CardBody, CardFooter, Text, Container } from "@chakra-ui/react";
 import { Flex, Circle, Box, Image, Badge, useColorModeValue, Icon, chakra, Tooltip, Stack, Heading, Button, Center, VStack } from "@chakra-ui/react";
-import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
-import { FiShoppingCart } from "react-icons/fi";
 
-const Product = ({ product, onAddToCart }) => {
+const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
   const data = {
     isNew: true,
-    imageURL: product.media.source,
-    name: product.name,
+    imageURL: item.media.source,
+    name: item.name,
     price: 4.0,
     rating: 4.2,
     numReviews: 34,
-    description: product.description,
+    description: item.description,
+    totalPrice: item.line_total.formatted_with_symbol,
+    quantity: item.quantity,
   };
 
   return (
@@ -23,21 +23,21 @@ const Product = ({ product, onAddToCart }) => {
           <Stack spacing="0">
             <VStack>
               <Center>
-                <Heading mt={4} pt={4} fontSize="xl" as="h1" fontWeight="bold" color="gray.100" isTruncated>
+                <Heading mt={4} pt={4} fontSize="xl" as="h1" fontWeight="bold" isTruncated>
                   {data.name}
                 </Heading>
               </Center>
               <Center>
-                <Text m={1} p={4} dangerouslySetInnerHTML={{ __html: data.description }} />
+                <Text>{data.totalPrice}</Text>
               </Center>
             </VStack>
             <Flex justifyContent="space-between" m={2} p={4}>
-              <Text fontSize="2xl" color={useColorModeValue("gray.800", "white")} as="span">
-                Rp. {data.price.toFixed(2)}
-              </Text>
-              <Button aria-label="Add to Cart" onClick={() => onAddToCart(product.id, 1)}>
-                Beli
-              </Button>
+              <Button onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}> - </Button>
+              <Center>
+                <Text>{data.quantity}</Text>
+              </Center>
+              <Button onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}>+</Button>
+              <Button onClick={() => onRemoveFromCart(item.id)}>Remove</Button>
             </Flex>
           </Stack>
         </Box>
@@ -46,4 +46,4 @@ const Product = ({ product, onAddToCart }) => {
   );
 };
 
-export default Product;
+export default CartItem;

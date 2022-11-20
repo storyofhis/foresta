@@ -2,8 +2,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { Home, Login, Register, SignUp } from "./components";
 import { Dashboard } from "./components/Dashboard";
-import Products from "./components/Dashboard/Products";
 import { commerce } from "./lib/commerce";
+import { Products, Cart } from "./components/Dashboard";
 
 const Router = () => {
   const [products, setProducts] = useState([]);
@@ -69,6 +69,9 @@ const Router = () => {
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/bibit">
             <Products products={products} onAddToCart={handleAddToCart} />
+          </Route>
+          <Route exact path="/cart">
+            <Cart cart={cart} handleAddCartQty={handleAddCartQty} handleRemoveFromCart={handleRemoveFromCart} handleEmptyCart={handleEmptyCart} />
           </Route>
           <Route exact path="/PohonKu" />
         </Switch>
