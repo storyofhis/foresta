@@ -33,7 +33,7 @@ const Login = () => {
                     bg: "#006644",
                   }}
                 >
-                  Sign in
+                  <Link href="/dashboard">Sign in</Link>
                 </Button>
               </Stack>
             </Stack>
