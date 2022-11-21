@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, GridItem, SimpleGrid, Box, Input, Stack, InputGroup, InputRightElement, IconButton, Flex, Text, Button } from "@chakra-ui/react";
 import CartItem from "../CartItem/CartItem";
+import { Link } from "react-router-dom";
 const FilledCart = ({ cart, handleAddCartQty, handleRemoveFromCart, handleEmptyCart }) => {
   const data = {
     isNew: true,
@@ -21,7 +22,9 @@ const FilledCart = ({ cart, handleAddCartQty, handleRemoveFromCart, handleEmptyC
         </Text>
         <Flex justifyContent="space-between" m={4} p={4}>
           <Button onClick={handleEmptyCart}>Empty Cart</Button>
-          <Button>Checkout</Button>
+          <Button>
+            <Link to="/checkout">Checkout</Link>
+          </Button>
         </Flex>
       </div>
     </>
