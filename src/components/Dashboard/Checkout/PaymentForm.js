@@ -5,7 +5,7 @@ import Review from "./Review";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-const Payment = ({ checkoutToken, nextStep, backStep, shippingData, onCaptureCheckout }) => {
+const PaymentForm = ({ checkoutToken, nextStep, backStep, shippingData, onCaptureCheckout }) => {
   const handleSubmit = async (event, elements, stripe) => {
     event.preventDefault();
 
@@ -39,8 +39,24 @@ const Payment = ({ checkoutToken, nextStep, backStep, shippingData, onCaptureChe
   return (
     <div>
       <Review checkoutToken={checkoutToken} />
+      <br />
+      <h4>Payment Method</h4>
+      <Elements stripe={stripePromise}>
+        <ElementsConsumer>
+          {({ elements, stripe }) => (
+            <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
+              <CardElement />
+              <br /> <br />
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <button onClick={backStep}>Back</button>
+                <button disabled={!stripe}>Pay {checkoutToken.live.subtotal.formatted_with_symbol}</button>
+              </div>
+            </form>
+          )}
+        </ElementsConsumer>
+      </Elements>
     </div>
   );
 };
 
-export default Payment;
+export default PaymentForm;

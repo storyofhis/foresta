@@ -7,7 +7,7 @@ import { Button } from "@chakra-ui/react";
 import { Progress, Divider, Box, ButtonGroup, Heading, Flex, FormControl, GridItem, FormLabel, Input, Select, SimpleGrid, InputLeftAddon, InputGroup, Textarea, FormHelperText, InputRightElement, Text } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 import AddressForm from "./AddressForm";
-import PaymentForm from "./Payment";
+import PaymentForm from "./PaymentForm";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 
 const steps = ["Shipping address", "Payment details"];
@@ -55,7 +55,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
         </div>
         <br />
         <Button>
-          <Link to="/">Back to home</Link>
+          <Link to="/bibit">Back to home</Link>
         </Button>
       </>
     ) : (

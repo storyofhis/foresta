@@ -4,7 +4,7 @@ step to run this app:
 - pack installation and run the local :
 
 ```
-yarn && yarn start
+yarn && yarn dev
 ```
 
 - server run :

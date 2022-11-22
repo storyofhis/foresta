@@ -1,13 +1,12 @@
 import React from "react";
-import { Typography, List, ListItem, ListItemText } from "@material-ui/core";
-
+import { Text, Heading } from "@chakra-ui/react";
 const Review = ({ checkoutToken }) => {
   return (
     <>
-      <h6 variant="h6" gutterBottom>
+      <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
         Order summary
-      </h6>
-      <div disablePadding>
+      </Heading>
+      {/* <div>
         {checkoutToken.live.line_items.map((product) => (
           <div style={{ padding: "10px 0" }} key={product.name}>
             <div primary={product.name} secondary={`Quantity: ${product.quantity}`} />
@@ -20,7 +19,7 @@ const Review = ({ checkoutToken }) => {
             {checkoutToken.live.subtotal.formatted_with_symbol}
           </p>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
