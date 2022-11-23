@@ -93,9 +93,9 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
             Checkout
           </Heading>
           <Steps activeStep={activeStep}>
-            {steps.map(({ label }) => (
+            {steps?.map(({ label, content }) => (
               <Step label={label} key={label}>
-                {label}
+                {content}
               </Step>
             ))}
           </Steps>
