@@ -30,7 +30,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-const AddressForm = ({ checkoutToken, test }) => {
+const AddressForm = ({ checkoutToken, test, prevStep, activeStep, nextStep, steps }) => {
+  console.log("checkout tokennya ", checkoutToken);
   const [shippingCountries, setShippingCountries] = useState([]);
   const [shippingCountry, setShippingCountry] = useState("");
   const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
@@ -73,9 +74,9 @@ const AddressForm = ({ checkoutToken, test }) => {
 
   return (
     <>
-      <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
+      {/* <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
         Shipping Address
-      </Heading>
+      </Heading> */}
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit((data) => test({ ...data, shippingCountry, shippingSubdivision, shippingOptions }))}>
           <SimpleGrid spacing={3}>
@@ -130,10 +131,10 @@ const AddressForm = ({ checkoutToken, test }) => {
           </SimpleGrid>
           <br />
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Button>
-              <Link to="/cart">Back to Cart</Link>
+            <Button isDisabled={activeStep === 0} mr={4} onClick={prevStep} size="sm" variant="ghost">
+              Prev
             </Button>
-            <Button type="submit">Next</Button>
+            <Button onClick={nextStep}>{activeStep === steps.length - 1 ? "Finis" : "Next"}</Button>
           </div>
         </form>
       </FormProvider>

@@ -2,10 +2,11 @@ import React from "react";
 import { Elements, CardElement, ElementsConsumer } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Review from "./Review";
+import { Button } from "@chakra-ui/react";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-const PaymentForm = ({ checkoutToken, nextStep, backStep, shippingData, onCaptureCheckout }) => {
+const PaymentForm = ({ checkoutToken, nextStep, prevStep, shippingData, onCaptureCheckout, activeStep, steps }) => {
   const handleSubmit = async (event, elements, stripe) => {
     event.preventDefault();
 
@@ -48,8 +49,12 @@ const PaymentForm = ({ checkoutToken, nextStep, backStep, shippingData, onCaptur
               <CardElement />
               <br /> <br />
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <button onClick={backStep}>Back</button>
-                <button disabled={!stripe}>Pay {checkoutToken.live.subtotal.formatted_with_symbol}</button>
+                <Button mr={4} onClick={prevStep} size="sm">
+                  Prev
+                </Button>
+                <Button onClick={nextStep} size="sm" disabled={!stripe}>
+                  {activeStep === steps.length - 1 ? "Finish" : `Pay ${checkoutToken.live.subtotal.formatted_with_symbol}`}
+                </Button>
               </div>
             </form>
           )}

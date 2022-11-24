@@ -1,25 +1,21 @@
 import React from "react";
-import { Text, Heading } from "@chakra-ui/react";
+import { Text, Heading, List, ListItem } from "@chakra-ui/react";
 const Review = ({ checkoutToken }) => {
   return (
     <>
-      <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
-        Order summary
-      </Heading>
-      {/* <div>
+      <List>
         {checkoutToken.live.line_items.map((product) => (
-          <div style={{ padding: "10px 0" }} key={product.name}>
-            <div primary={product.name} secondary={`Quantity: ${product.quantity}`} />
-            <div variant="body2">{product.line_total.formatted_with_symbol}</div>
-          </div>
+          <ListItem style={{ padding: "10px 0" }} key={product.name}>
+            <Text>{product.name}</Text>
+            <Text>{`Quantity: ${product.quantity}`}</Text>
+            <Heading>{product.line_total.formatted_with_symbol}</Heading>
+          </ListItem>
         ))}
-        <div style={{ padding: "10px 0" }}>
-          <div primary="Total" />
-          <p variant="subtitle1" style={{ fontWeight: "700" }}>
-            {checkoutToken.live.subtotal.formatted_with_symbol}
-          </p>
-        </div>
-      </div> */}
+        <ListItem style={{ padding: "10px 0" }}>
+          <Text />
+          <Text style={{ fontWeight: "700" }}>{checkoutToken.live.subtotal.formatted_with_symbol}</Text>
+        </ListItem>
+      </List>
     </>
   );
 };
