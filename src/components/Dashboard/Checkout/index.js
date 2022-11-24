@@ -10,16 +10,20 @@ import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 
-const steps = ["Shipping address", "Payment details"];
+const steps = [{ label: "Shipping Address" }, { label: "Payment Details" }];
 
 const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
   const [checkoutToken, setCheckoutToken] = useState(null);
-  const [activeStep, setActiveStep] = useState(0);
+  // const [activeStep, setActiveStep] = useState(0);
   const [shippingData, setShippingData] = useState({});
   const history = useHistory();
 
-  const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  const { nextStep, prevStep, reset, activeStep } = useSteps({
+    initialStep: 0,
+  });
+
+  // const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  // const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
   useEffect(() => {
     if (cart.id) {
@@ -76,11 +80,11 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
     );
   }
 
-  const Form = () =>
+  const Form = ({ activeStep, prevStep, nextStep, steps }) =>
     activeStep === 0 ? (
-      <AddressForm checkoutToken={checkoutToken} nextStep={nextStep} setShippingData={setShippingData} test={test} />
+      <AddressForm checkoutToken={checkoutToken} nextStep={nextStep} prevStep={prevStep} activeStep={activeStep} setShippingData={setShippingData} test={test} steps={steps} />
     ) : (
-      <PaymentForm checkoutToken={checkoutToken} nextStep={nextStep} backStep={backStep} shippingData={shippingData} onCaptureCheckout={onCaptureCheckout} />
+      <PaymentForm checkoutToken={checkoutToken} nextStep={nextStep} prevStep={prevStep} activeStep={activeStep} shippingData={shippingData} onCaptureCheckout={onCaptureCheckout} steps={steps} />
     );
 
   return (
@@ -93,13 +97,26 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
             Checkout
           </Heading>
           <Steps activeStep={activeStep}>
-            {steps?.map(({ label, content }) => (
+            {steps?.map(({ label }) => (
               <Step label={label} key={label}>
-                {content}
+                <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
+                  {label}
+                </Heading>
               </Step>
             ))}
           </Steps>
-          {activeStep === steps.length ? <Confirmation /> : checkoutToken && <Form />}
+          {activeStep === steps.length ? (
+            <Flex px={4} py={4} width="100%" flexDirection="column">
+              <Heading fontSize="xl" textAlign="center">
+                Woohoo! All steps completed!
+              </Heading>
+              <Button mx="auto" mt={6} size="sm" onClick={reset}>
+                Reset
+              </Button>
+            </Flex>
+          ) : (
+            checkoutToken && <Form activeStep={activeStep} prevStep={prevStep} nextStep={nextStep} steps={steps} />
+          )}
         </Box>
       </main>
       <Footer />
