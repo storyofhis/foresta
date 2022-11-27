@@ -134,7 +134,7 @@ const AddressForm = ({ checkoutToken, test, prevStep, activeStep, nextStep, step
             <Button isDisabled={activeStep === 0} mr={4} onClick={prevStep} size="sm" variant="ghost">
               Prev
             </Button>
-            <Button onClick={nextStep}>{activeStep === steps.length - 1 ? "Finis" : "Next"}</Button>
+            <Button onClick={nextStep}>{activeStep === steps.length - 1 ? "Finish" : "Next"}</Button>
           </div>
         </form>
       </FormProvider>
