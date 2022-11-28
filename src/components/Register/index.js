@@ -127,7 +127,6 @@ const Register = () => {
           )}
         </Box>
       </main>
-
       <Footer />
     </>
   );
