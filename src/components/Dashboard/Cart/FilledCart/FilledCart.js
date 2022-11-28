@@ -9,14 +9,12 @@ const FilledCart = ({ cart, handleAddCartQty, handleRemoveFromCart, handleEmptyC
   };
   return (
     <>
-      <SimpleGrid minChildWidth="300px" spacing="7" minH="full">
-        {cart.line_items.map((item) => (
-          <Grid key={item.id}>
-            <CartItem item={item} onUpdateCartQty={handleAddCartQty} onRemoveFromCart={handleRemoveFromCart} />
-          </Grid>
-        ))}
-      </SimpleGrid>
-      <div>
+      {cart.line_items.map((item) => (
+        <SimpleGrid key={item.id} columns={3} minChildWidth="30%">
+          <CartItem item={item} onUpdateCartQty={handleAddCartQty} onRemoveFromCart={handleRemoveFromCart} />
+        </SimpleGrid>
+      ))}
+      <Box justify="center" align="center">
         <Text m={4} p={4}>
           Subtotal : {data.subtotal}
         </Text>
@@ -26,7 +24,7 @@ const FilledCart = ({ cart, handleAddCartQty, handleRemoveFromCart, handleEmptyC
             <Link to="/checkout">Checkout</Link>
           </Button>
         </Flex>
-      </div>
+      </Box>
     </>
   );
 };
