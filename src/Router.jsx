@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Home, Login, Register, SignUp } from "./components";
 import { Dashboard } from "./components/Dashboard";
 import { commerce } from "./lib/commerce";
-import { Products, Cart, Checkout } from "./components/Dashboard";
+import { Products, Cart, Checkout, PohonKu } from "./components/Dashboard";
 
 const Router = () => {
   const [products, setProducts] = useState([]);
@@ -76,7 +76,7 @@ const Router = () => {
           <Route exact path="/checkout">
             <Checkout cart={cart} order={order} onCaptureCheckout={handleCaptureCheckout} error={errorMessage} />
           </Route>
-          <Route exact path="/PohonKu" />
+          <Route exact path="/PohonKu" component={PohonKu} />
         </Switch>
       </div>
     </BrowserRouter>

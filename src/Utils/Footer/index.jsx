@@ -43,10 +43,21 @@ const SocialButton = ({ children, label, href }) => {
 
 export default function SmallWithLogoLeft() {
   return (
-    <Box bg={useColorModeValue("gray.50", "gray.900")} color={useColorModeValue("gray.700", "gray.200")}>
-      <Container as={Stack} maxW={"6xl"} py={4} direction={{ base: "column", md: "row" }} spacing={4} justify={{ base: "center", md: "space-between" }} align={{ base: "center", md: "center" }}>
+    <Box bg={useColorModeValue("#006644", "gray.900")} color={useColorModeValue("white", "white")}>
+      <Container
+        as="footer"
+        role="contentinfo"
+        maxW={"6xl"}
+        /** py={4} */ py={{ base: "12", md: "16" }}
+        direction={{ base: "column", md: "row" }}
+        spacing={4}
+        justify={{ base: "center", md: "space-between" }}
+        align={{ base: "center", md: "center" }}
+        bottom={0}
+        // color={useColorModeValue("#006644", "#006644")}
+      >
         <Logo />
-        <Text>Copyright © 2022 All rights reserved By Foresta</Text>
+        <Text align="center">Copyright © 2022 All rights reserved By Foresta</Text>
         <Stack direction={"row"} spacing={6}>
           <SocialButton label={"Twitter"} href={"#"}>
             <FaTwitter />
