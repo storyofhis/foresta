@@ -15,7 +15,7 @@ const Navbar = () => {
   const isDark = colorMode === "dark";
 
   return (
-    <Box bg={useColorModeValue("#7ACB90", "gray.900")} px={4}>
+    <Box bg={useColorModeValue("#E3FCEF", "gray.900")} px={4}>
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
         {/* <IconButton size={"md"} icon={isOpen ? <CloseIcon /> : <HamburgerIcon />} aria-label={"Open Menu"} display={{ md: "none" }} onClick={isOpen ? onClose : onOpen} /> */}
         <HStack spacing={8} alignItems={"center"}>

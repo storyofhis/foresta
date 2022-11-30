@@ -23,7 +23,7 @@ const Product = ({ product, onAddToCart }) => {
           <Stack spacing="0">
             <VStack>
               <Center>
-                <Heading mt={4} pt={4} fontSize="xl" as="h1" fontWeight="bold" color="gray.100" isTruncated>
+                <Heading color={useColorModeValue("black", "white")} mt={4} pt={4} fontSize="xl" as="h1" fontWeight="bold">
                   {data.name}
                 </Heading>
               </Center>
@@ -35,8 +35,8 @@ const Product = ({ product, onAddToCart }) => {
               <Text fontSize="2xl" color={useColorModeValue("gray.800", "white")} as="span">
                 Rp. {data.price.toFixed(2)}
               </Text>
-              <Button aria-label="Add to Cart" onClick={() => onAddToCart(product.id, 1)}>
-                Beli
+              <Button bgColor="#006644" aria-label="Add to Cart" onClick={() => onAddToCart(product.id, 1)}>
+                <Text color={useColorModeValue("white", "gray.800")}>Beli</Text>
               </Button>
             </Flex>
           </Stack>

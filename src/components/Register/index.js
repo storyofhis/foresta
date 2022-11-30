@@ -4,7 +4,7 @@ import { Footer } from "../../Utils/index";
 import { Flex, Box, FormControl, FormLabel, Input, Checkbox, Stack, Link, Button, Heading, Text, useColorModeValue } from "@chakra-ui/react";
 import { Steps, Step, useSteps } from "chakra-ui-steps";
 
-const steps = [{ label: "register-1" }, { label: "register-2" }];
+const steps = [{ label: "Pendaftaran" }, { label: "Form" }];
 
 const Register = () => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
@@ -37,7 +37,7 @@ const Register = () => {
               </Button>
             </Flex>
           ) : activeStep === 0 ? (
-            <Flex minH={"100vh"} align={"center"} justify={"center"}>
+            <Flex align={"center"} justify={"center"}>
               <Stack>
                 <FormControl id="username">
                   <FormLabel>Username</FormLabel>
@@ -70,60 +70,60 @@ const Register = () => {
               </Stack>
             </Flex>
           ) : (
-            <Flex minH={"100vh"} align={"center"} justify={"center"}>
-              <Stack spacing={4}>
-                <FormControl id="name">
-                  <FormLabel>Nama Lengkap</FormLabel>
-                  <Input type="name" />
-                </FormControl>
-                <FormControl id="nik">
-                  <FormLabel>NIK</FormLabel>
-                  <Input type="nik" />
-                </FormControl>
-                <FormControl id="tempat-lahir">
-                  <FormLabel>Tempat Lahir</FormLabel>
-                  <Input type="tempat-lahir" />
-                </FormControl>
-                <FormControl id="tanggal-lahir">
-                  <FormLabel>Tanggal Lahir</FormLabel>
-                  <Input type="tanggal-lahir" />
-                </FormControl>
-                <FormControl id="jenis-kelamin">
-                  <FormLabel>Jenis Kelamin</FormLabel>
-                  <Input type="jenis-kelamin" />
-                </FormControl>
-                <FormControl id="alamat">
-                  <FormLabel>Alamat</FormLabel>
-                  <Input type="alamat" />
-                </FormControl>
-                <FormControl id="pekerjaan">
-                  <FormLabel>Pekerjaan</FormLabel>
-                  <Input type="pekerjaan" />
-                </FormControl>
-                <Stack spacing={10}>
-                  <Button
-                    bg={"#006644"}
-                    color={"white"}
-                    _hover={{
-                      bg: "#006644",
-                    }}
-                    onClick={nextStep}
-                  >
-                    {activeStep === steps.length - 1 ? "Selanjutnya" : ""}
-                  </Button>
-                  <Button
-                    bg={"#006644"}
-                    color={"white"}
-                    _hover={{
-                      bg: "#006644",
-                    }}
-                    onClick={prevStep}
-                  >
-                    Kembali
-                  </Button>
-                </Stack>
+            // <Flex align={"center"} justify={"center"}>
+            <Stack>
+              <FormControl id="name">
+                <FormLabel>Nama Lengkap</FormLabel>
+                <Input type="name" />
+              </FormControl>
+              <FormControl id="nik">
+                <FormLabel>NIK</FormLabel>
+                <Input type="nik" />
+              </FormControl>
+              <FormControl id="tempat-lahir">
+                <FormLabel>Tempat Lahir</FormLabel>
+                <Input type="tempat-lahir" />
+              </FormControl>
+              <FormControl id="tanggal-lahir">
+                <FormLabel>Tanggal Lahir</FormLabel>
+                <Input type="tanggal-lahir" />
+              </FormControl>
+              <FormControl id="jenis-kelamin">
+                <FormLabel>Jenis Kelamin</FormLabel>
+                <Input type="jenis-kelamin" />
+              </FormControl>
+              <FormControl id="alamat">
+                <FormLabel>Alamat</FormLabel>
+                <Input type="alamat" />
+              </FormControl>
+              <FormControl id="pekerjaan">
+                <FormLabel>Pekerjaan</FormLabel>
+                <Input type="pekerjaan" />
+              </FormControl>
+              <Stack spacing={10}>
+                <Button
+                  bg={"#006644"}
+                  color={"white"}
+                  _hover={{
+                    bg: "#006644",
+                  }}
+                  onClick={nextStep}
+                >
+                  {activeStep === steps.length - 1 ? "Selanjutnya" : ""}
+                </Button>
+                <Button
+                  bg={"#006644"}
+                  color={"white"}
+                  _hover={{
+                    bg: "#006644",
+                  }}
+                  onClick={prevStep}
+                >
+                  Kembali
+                </Button>
               </Stack>
-            </Flex>
+            </Stack>
+            // </Flex>
           )}
         </Box>
       </main>
