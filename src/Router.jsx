@@ -76,7 +76,9 @@ const Router = () => {
           <Route exact path="/checkout">
             <Checkout cart={cart} order={order} onCaptureCheckout={handleCaptureCheckout} error={errorMessage} />
           </Route>
-          <Route exact path="/PohonKu" component={PohonKu} />
+          <Route exact path="/PohonKu">
+            <PohonKu products={products} order={order} cart={cart} />
+          </Route>
         </Switch>
       </div>
     </BrowserRouter>
