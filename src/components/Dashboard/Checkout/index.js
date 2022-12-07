@@ -108,7 +108,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
           {activeStep === steps.length ? (
             <Flex px={4} py={4} width="100%" flexDirection="column">
               <Heading fontSize="xl" textAlign="center">
-                Woohoo! All steps completed!
+                Transaksi Berhasil!
               </Heading>
               <Button mx="auto" mt={6} size="sm" onClick={reset}>
                 Reset
