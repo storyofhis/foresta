@@ -54,6 +54,8 @@ export default function SmallWithLogoLeft() {
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}
         bottom={0}
+        position="fixed"
+
         // color={useColorModeValue("#006644", "#006644")}
       >
         <Logo />
